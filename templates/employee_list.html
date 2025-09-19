@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Employee - HRMS</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+
+<body>
+    <div class="container mt-5">
+        <h3 class="mb-4">Add New Employee</h3>
+        <form id="employeeForm">
+            <!-- Personal Information -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    Personal Information
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <label for="fullName" class="form-label">Full Name</label>
+                        <input type="text" class="form-control" id="fullName" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="dob" class="form-label">Date of Birth</label>
+                        <input type="date" class="form-control" id="dob" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="gender" class="form-label">Gender</label>
+                        <select class="form-select" id="gender" required>
+                            <option value="" disabled selected>Select Gender</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="contactNumber" class="form-label">Contact Number</label>
+                        <input type="tel" class="form-control" id="contactNumber" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email Address</label>
+                        <input type="email" class="form-control" id="email" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="address" class="form-label">Home Address</label>
+                        <textarea class="form-control" id="address" required></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="emergencyContact" class="form-label">Emergency Contact Details</label>
+                        <input type="text" class="form-control" id="emergencyContact" required>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Job Role Information -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    Job Role
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <label for="role" class="form-label">Role/Position</label>
+                        <input type="text" class="form-control" id="role" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="department" class="form-label">Department</label>
+                        <input type="text" class="form-control" id="department" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="manager" class="form-label">Manager/Supervisor (if applicable)</label>
+                        <input type="text" class="form-control" id="manager">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Document Upload -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    Documents Upload
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <label for="resume" class="form-label">Upload Resume</label>
+                        <input type="file" class="form-control" id="resume" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="idProof" class="form-label">Upload ID Proof (e.g., Aadhar Card, Passport)</label>
+                        <input type="file" class="form-control" id="idProof" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="otherDocuments" class="form-label">Upload Other Documents (e.g., Offer Letter)</label>
+                        <input type="file" class="form-control" id="otherDocuments">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="mb-3">
+                <button type="submit" class="btn btn-primary">Add Employee</button>
+            </div>
+
+            <!-- Success Message -->
+            <div id="successMessage" class="alert alert-success mt-3" style="display: none;">
+                New employee <span id="employeeName"></span> added successfully.
+            </div>
+        </form>
+    </div>
+
+    <script>
+        // Form Submission Handling
+        document.getElementById("employeeForm").addEventListener("submit", function (event) {
+            event.preventDefault(); // Prevent the form from submitting
+
+            // Simple form validation
+            let fullName = document.getElementById("fullName").value;
+            let dob = document.getElementById("dob").value;
+            let gender = document.getElementById("gender").value;
+            let email = document.getElementById("email").value;
+            let contactNumber = document.getElementById("contactNumber").value;
+            let address = document.getElementById("address").value;
+            let emergencyContact = document.getElementById("emergencyContact").value;
+
+            if (!fullName || !dob || !gender || !email || !contactNumber || !address || !emergencyContact) {
+                alert("Please fill out all required fields.");
+                return;
+            }
+
+            // Show success message
+            document.getElementById("employeeName").textContent = fullName;
+            document.getElementById("successMessage").style.display = "block";
+            
+            // You can send the form data to the backend here via AJAX or Fetch API
+            // Example: Use fetch to send form data to the backend API for saving in the database
+            // fetch('/api/add_employee', { method: 'POST', body: new FormData(this) })
+        });
+    </script>
+</body>
+
+</html>
